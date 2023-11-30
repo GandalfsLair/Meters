@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Styles for the popup container */
+    #popup-container {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+
+    /* Styles for the overlay background */
+    #overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+  </style>
+</head>
+<body>
+<h1>Whats the Thing?</h1>
+<h2>Do you want to put more info here? (Message Appears in 3 seconds from Button press)</h2>
+<br>
+<!-- Button to trigger the popup
+
+<button onclick="showPopupAfterDelay(DELAY IN MILLISECONDS)">NAME OF BUTTON</button>
+ -->
+<button onclick="showPopupAfterDelay(3000)">NAME OF BUTTON</button>
+
+<!-- Popup container -->
+<div id="popup-container">
+  <p>Pop Up Message Goes Here</p>
+  <button onclick="closePopup()">OK</button>
+</div>
+
+<!-- Overlay background -->
+<div id="overlay"></div>
+
+<script>
+  function showPopupAfterDelay(delay) {
+    // Display overlay
+    document.getElementById('overlay').style.display = 'block';
+
+    // Set a timeout to display the popup after the specified delay
+    setTimeout(function() {
+      document.getElementById('popup-container').style.display = 'block';
+    }, delay);
+  }
+
+  function closePopup() {
+    // Hide popup and overlay
+    document.getElementById('popup-container').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+  }
+</script>
+
+</body>
+</html>
