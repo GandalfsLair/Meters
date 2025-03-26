@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Progress Meter Examples</title>
+<style>
+body {
+  font-family: sans-serif;
+}
+
+.progress-container {
+  width: 300px;
+  height: 20px;
+  background-color: #eee;
+  border-radius: 5px;
+  overflow: hidden; /* Important for hiding overflow */
+  margin-bottom: 20px; /* Space between examples */
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: #4CAF50; /* Green */
+  width: 0%; /* Initial width */
+  border-radius: 5px;
+  transition: width 0.5s linear; /* Smooth transition */
+}
+
+/* Example 2: Different color */
+.progress-container.example2 .progress-bar {
+  background-color: #2196F3; /* Blue */
+}
+
+/* Example 3: Striped */
+.progress-container.example3 .progress-bar {
+    background-image: linear-gradient(
+        45deg, #f0f0f0 25%, transparent 25%,
+        transparent 50%, #f0f0f0 50%, #f0f0f0 75%,
+        transparent 75%, transparent
+    );
+    background-size: 20px 20px; /* Adjust stripe size */
+    animation: progress-stripes 1s linear infinite; /* Animate stripes */
+}
+
+@keyframes progress-stripes {
+    from { background-position: 0 0; }
+    to { background-position: 40px 0; } /* Double stripe size */
+}
+
+
+/* Example 4: With Text */
+.progress-container.example4 {
+    position: relative; /* Needed for positioning the text */
+}
+.progress-container.example4 .progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #333;
+    font-size: 14px;
+}
+
+
+
+</style>
+</head>
+<body>
+
+<h1>Progress Meter Examples</h1>
+
+<div class="progress-container">
+  <div class="progress-bar" id="progressBar1"></div>
+</div>
+
+<div class="progress-container example2">
+  <div class="progress-bar" id="progressBar2"></div>
+</div>
+
+<div class="progress-container example3">
+  <div class="progress-bar" id="progressBar3"></div>
+</div>
+
+<div class="progress-container example4">
+    <div class="progress-bar" id="progressBar4"></div>
+    <div class="progress-text" id="progressText4">0%</div>
+</div>
+
+
+<script>
+function animateProgressBar(progressBarId, duration, progressTextId) {
+    const progressBar = document.getElementById(progressBarId);
+    let width = 0;
+    const interval = setInterval(() => {
+        width++;
+        progressBar.style.width = width + '%';
+        if (progressTextId) {
+            document.getElementById(progressTextId).textContent = width + '%';
+        }
+
+        if (width >= 100) {
+            clearInterval(interval);
+        }
+    }, duration * 10); // Calculate delay based on duration
+}
+
+
+animateProgressBar("progressBar1", 30);
+animateProgressBar("progressBar2", 30);
+animateProgressBar("progressBar3", 30);
+animateProgressBar("progressBar4", 30, "progressText4"); // Example with text
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .progress-container {
+      display: flex;
+      align-items: center;
+      margin: 20px;
+    }
+
+    .progress-label {
+      width: 150px; /* Adjust spacing */
+      font-weight: bold;
+    }
+
+    .progress-bar-wrapper {
+      flex-grow: 1;
+      border: 1px solid #ccc;
+      width: 300px;
+    }
+
+    .progress-bar {
+      width: 0;
+      height: 30px;
+      background-color: #4CAF50;
+      text-align: center;
+      line-height: 30px;
+      color: white;
+    }
+    
+  </style>
+</head>
+<body>
+<h1>Chained Exploit</h1>
+
+<div class="progress-container">
+  <div class="progress-label">Run Exploit 1</div>
+  <div class="progress-bar-wrapper">
+    <div id="progress-bar-1" class="progress-bar">0%</div>
+  </div>
+</div>
+
+<div class="progress-container">
+  <div class="progress-label">Run Exploit 2</div>
+  <div class="progress-bar-wrapper">
+    <div id="progress-bar-2" class="progress-bar">0%</div>
+  </div>
+</div>
+
+<div class="progress-container">
+    <div class="progress-label">Run Exploit 3</div>
+    <div class="progress-bar-wrapper">
+      <div id="progress-bar-3" class="progress-bar">0%</div>
+    </div>
+  </div>
+
+<button onclick="startProgressBar('progress-bar-1', 50, function() { startProgressBar('progress-bar-2', 75, function() { startProgressBar('progress-bar-3', 25)} ); })">
+  Start Sequence
+</button>
+
+<script>
+  function startProgressBar(progressBarId, intervalSpeed, callback) {
+    var progressBar = document.getElementById(progressBarId);
+    var width = 0;
+    var interval = setInterval(function() {
+      if (width >= 100) {
+        clearInterval(interval);
+        if (callback) callback(); // Start the next progress bar if provided
+      } else {
+        width++;
+        progressBar.style.width = width + '%';
+        progressBar.innerHTML = width + '%';
+      }
+    }, intervalSpeed);
+  }
+</script>
+
+</body>
+</html>
